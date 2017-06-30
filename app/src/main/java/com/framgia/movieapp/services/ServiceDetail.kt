@@ -35,7 +35,7 @@ class ServiceDetail(internal var mIServiceDetail: ServiceDetail.IServiceDetail, 
   }
 
   interface ILoadDetail {
-    @GET("{id}/similar")
+    @GET("movie/{id}/similar")
     fun loadDetail(@Path("id") id: String, @Query("api_key") api_key: String,
         @Query("page") page: Int): Call<Movie>
   }

@@ -18,9 +18,9 @@ import java.util.*
  * Created by FRAMGIA\pham.duc.nam on 26/06/2017.
  */
 
-class NowPlayingAdapter(private val context: Context) : RecyclerView.Adapter<NowPlayingAdapter.ItemViewHolder>() {
+class NowPlayingAdapter(
+    private val context: Context) : RecyclerView.Adapter<NowPlayingAdapter.ItemViewHolder>() {
 
-  private var isLoading: Boolean = false
   private var mMainResultsList: ArrayList<MainResults> = ArrayList()
   private var onClickStarListener: OnClickStarListener? = null
 
@@ -64,10 +64,6 @@ class NowPlayingAdapter(private val context: Context) : RecyclerView.Adapter<Now
     return mMainResultsList.size
   }
 
-  fun setLoaded() {
-    isLoading = false
-  }
-
   inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindData(mainResults: MainResults) {
@@ -81,9 +77,12 @@ class NowPlayingAdapter(private val context: Context) : RecyclerView.Adapter<Now
             .crossFade()
             .into(itemView.imgPoster)
 
-        if (mainResults.isFavorite) {
-          itemView.imgHeartFill.visibility = View.VISIBLE or View.GONE
-          itemView.imgHeart.visibility = View.GONE or View.VISIBLE
+        if (mainResults.isFavorite){
+          itemView.imgHeartFill.visibility = View.VISIBLE
+          itemView.imgHeart.visibility = View.GONE
+        }else{
+          itemView.imgHeartFill.visibility = View.GONE
+          itemView.imgHeart.visibility = View.VISIBLE
         }
 
         itemView.imgHeart.setOnClickListener {

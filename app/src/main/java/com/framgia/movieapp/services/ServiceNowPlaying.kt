@@ -33,7 +33,7 @@ class ServiceNowPlaying(internal var mIServiceNowPlaying: ServiceNowPlaying.ISer
   }
 
   interface ILoadNow {
-    @GET("now_playing")
+    @GET("movie/now_playing")
     fun loadNow(@Query("api_key") api_key: String, @Query("page") page: Int): Call<NowPlaying>
   }
 

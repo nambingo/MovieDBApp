@@ -8,7 +8,7 @@ object Constant {
   val DEBUG = java.lang.Boolean.parseBoolean("true")
 
 
-  var URL_BASE = "http://api.themoviedb.org/3/movie/"
+  var URL_BASE = "http://api.themoviedb.org/3/"
   var API_KEY = "4df263f48a4fe2621749627f5d001bf0"
   var URL_IMAGE = "http://image.tmdb.org/t/p/w500/"
 

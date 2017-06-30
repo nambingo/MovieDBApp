@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.framgia.movieapp.DetailActivity
 import com.framgia.movieapp.R
@@ -35,6 +33,14 @@ class DetailAdapter(
   fun setData(list: ArrayList<MainResults>) {
     this.mDetailResultsSelected = list
     this.notifyDataSetChanged()
+  }
+
+  fun addData(list: ArrayList<MainResults>) {
+    val initPos = mDetailResultsSelected.size - 1
+    mDetailResultsSelected.removeAt(initPos)
+    notifyItemRemoved(initPos)
+    mDetailResultsSelected.addAll(list)
+    notifyItemRangeChanged(initPos, mDetailResultsSelected.size)
   }
 
   fun setOnClickStarListener(onClick: OnClickStarListener) {
@@ -74,11 +80,13 @@ class DetailAdapter(
             .crossFade()
             .into(itemView.imgPoster)
 
-        if (mainResults.isFavorite) {
-          itemView.imgHeartFill.visibility = View.VISIBLE or View.GONE
-          itemView.imgHeart.visibility = View.GONE or View.VISIBLE
+        if (mainResults.isFavorite){
+          itemView.imgHeartFill.visibility = View.VISIBLE
+          itemView.imgHeart.visibility = View.GONE
+        }else{
+          itemView.imgHeartFill.visibility = View.GONE
+          itemView.imgHeart.visibility = View.VISIBLE
         }
-
         itemView.imgHeart.setOnClickListener {
           itemView.imgHeart.visibility = View.GONE
           itemView.imgHeartFill.visibility = View.VISIBLE

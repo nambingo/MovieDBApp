@@ -42,22 +42,26 @@ class NowPlayingFragment : BaseFragment(), OnClickStarListener {
       addOnScrollListener(InfiniteScrollListener({ onLoadMore() }, linearLayout))
     }
     initAdapter();
-    showLoading()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    show()
     getData(mPage)
   }
 
   private fun getData(page: Int) {
     Services.loadNowPlaying(page, object : ServiceNowPlaying.IServiceNowPlaying {
-      override fun onSuccess(mainResultsList: ArrayList<MainResults>) {
-        hideLoading()
+      override fun onSuccess(mainResultsList: java.util.ArrayList<MainResults>) {
         if (PreferencesUtils.getFavoriteResult(activity) == null) {
-          clearAndAddData(mainResultsList)
-        } else {
+          setData(mainResultsList)
+        } else
           checkResultList(mainResultsList)
-        }
       }
 
-      override fun onError(error: String) {}
+      override fun onError(error: String) {
+        hide()
+      }
     })
   }
 
@@ -70,13 +74,16 @@ class NowPlayingFragment : BaseFragment(), OnClickStarListener {
         list[i].isFavorite = true
       }
     }
+    setData(list)
+  }
+
+  private fun setData(list: ArrayList<MainResults>) {
+    hide()
     if (mPage != 1) {
-      (mRecyclerView.adapter as NowPlayingAdapter).setLoaded()
       addData(list)
     } else {
       clearAndAddData(list)
     }
-
   }
 
   private fun clearAndAddData(list: ArrayList<MainResults>) {
@@ -101,6 +108,6 @@ class NowPlayingFragment : BaseFragment(), OnClickStarListener {
   }
 
   override fun onClick(result: MainResults) {
-    PreferencesUtils.setFavoriteResult(result,activity)
+    PreferencesUtils.setFavoriteResult(result, activity)
   }
 }

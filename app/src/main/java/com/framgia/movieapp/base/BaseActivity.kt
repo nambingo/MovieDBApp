@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
 import android.view.View
 import com.framgia.movieapp.utils.ProgressDialogUtil
+import com.kaopiz.kprogresshud.KProgressHUD
 
 /**
  * Created by FRAMGIA\pham.duc.nam on 29/06/2017.
@@ -13,6 +14,7 @@ import com.framgia.movieapp.utils.ProgressDialogUtil
 
 open class BaseActivity : AppCompatActivity() {
   protected var mProgress: ProgressDialogUtil? = null
+  private var hud: KProgressHUD? = null
 
   override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
     return super.onCreateView(name, context, attrs)
@@ -22,6 +24,11 @@ open class BaseActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
 
     mProgress = ProgressDialogUtil(this)
+//    hud = KProgressHUD.create(this)
+//        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE);
+    hud = KProgressHUD.create(this)
+        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+        .setDimAmount(0.5f);
   }
 
   fun showLoading() {
@@ -34,5 +41,11 @@ open class BaseActivity : AppCompatActivity() {
     if (mProgress != null && mProgress!!.isShowing) {
       mProgress!!.dismiss()
     }
+  }
+  fun show(){
+    hud?.show()
+  }
+  fun hide(){
+    hud?.dismiss()
   }
 }

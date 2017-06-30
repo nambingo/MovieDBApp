@@ -1,11 +1,13 @@
 package com.framgia.movieapp.favorites
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.framgia.movieapp.DetailActivity
 import com.framgia.movieapp.R
 import com.framgia.movieapp.model.MainResults
 import com.framgia.movieapp.utils.Constant
@@ -58,6 +60,13 @@ class FavoritesAdapter(
             .load(Constant.URL_IMAGE + mainResults.poster_path)
             .crossFade()
             .into(itemView.imgPoster)
+
+        itemView.tvMore.setOnClickListener {
+          val intent = Intent(itemView.context, DetailActivity::class.java)
+          intent.putExtra(Constant.TAG_MAIN_RESULT, mainResults)
+          itemView.context.startActivity(intent)
+        }
+
       }
     }
   }

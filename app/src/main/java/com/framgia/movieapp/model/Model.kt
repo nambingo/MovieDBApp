@@ -17,6 +17,15 @@ class NowPlaying {
   var results: ArrayList<MainResults> = ArrayList()
 }
 
+class MovieGenre {
+  var genres: ArrayList<Genres> = ArrayList()
+}
+
+class Genres {
+  var id: String = ""
+  var name: String = ""
+}
+
 class MainResults : Serializable {
   var id: String = ""
   var title: String = ""

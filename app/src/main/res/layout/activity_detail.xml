@@ -37,6 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                app:titleMarginTop="13dp"
+                app:titleTextColor="@android:color/white"
                 />
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -143,6 +145,24 @@
                                         android:layout_alignParentLeft="true"
                                         android:src="@drawable/ic_favorite_filled"
                                         android:visibility="gone"
+                                        />
+                                    <ImageView
+                                        android:id="@+id/imgCalendar"
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:src="@drawable/ic_calendar"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        />
+                                    <TextView
+                                        android:id="@+id/tvDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_toLeftOf="@+id/imgCalendar"
+                                        android:textColor="@android:color/darker_gray"
+                                        android:textSize="12sp"
                                         />
                                 </RelativeLayout>
 
